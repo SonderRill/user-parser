@@ -6,9 +6,9 @@ import { Controller, Get, Param } from '@nestjs/common'
 export class UsersController {
     constructor(private readonly _userService: UsersService) {}
 
-    @Get()
-    async getUserByEmail(@Param() name: string): Promise<User> {
-        const user = await this._userService.getUserByEmail(name)
+    @Get(':email')
+    async getUserByEmail(@Param() { email }: { email: string }): Promise<User> {
+        const user = await this._userService.getUserByEmail(email)
         return user
     }
 }

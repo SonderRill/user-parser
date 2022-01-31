@@ -22,7 +22,7 @@ export class UsersService implements OnModuleInit {
     constructor(
         @Inject(DATABASE_POOL) private readonly _conn: Pool,
         private readonly _httpService: HttpService,
-    ) { }
+    ) {}
 
     async onModuleInit(): Promise<void> {
         const { rows } = await this._conn.query<User>('SELECT * FROM users')
