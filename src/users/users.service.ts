@@ -21,7 +21,7 @@ export class UsersService implements OnModuleInit {
     constructor(
         @Inject(DATABASE_POOL) private readonly _conn: Pool,
         private readonly _httpService: HttpService,
-    ) { }
+    ) {}
 
     async onModuleInit(): Promise<void> {
         const { rows } = await this._conn.query<User>('SELECT * FROM users')
@@ -60,7 +60,7 @@ export class UsersService implements OnModuleInit {
                 return
             }
 
-            const params = diffUsers.map(user => Object.values(user))
+            const params = diffUsers.map((user) => Object.values(user))
 
             // INSERT INTO users (id, email) VALUES ('1', 'jack@mail.ru'), ('2', 'john@mail.ru'), ('3', 'jill@mail.ru') ...
             const sql = format(
@@ -72,13 +72,10 @@ export class UsersService implements OnModuleInit {
             this._users = this._users.concat(diffUsers)
 
             this._logger.log(`${diffUsers.length} users added`)
-
         } catch (error) {
-
             this._logger.debug(error, 'handleCron method error')
             throw error
         }
-
     }
 
     private async _getPaginatedExternalUsers(): Promise<User[]> {
@@ -102,7 +99,6 @@ export class UsersService implements OnModuleInit {
     }
 
     private _diffUsers(externalUsers: User[]): User[] {
-
         const users = externalUsers
             .filter(
                 (externalUser) =>
@@ -112,5 +108,4 @@ export class UsersService implements OnModuleInit {
 
         return users
     }
-
 }
