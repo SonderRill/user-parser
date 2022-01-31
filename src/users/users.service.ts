@@ -11,7 +11,8 @@ import { Pool } from 'pg'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { HttpService } from '@nestjs/axios'
 import { lastValueFrom } from 'rxjs'
-import format from 'pg-format'
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+const format = require('pg-format')
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -21,7 +22,7 @@ export class UsersService implements OnModuleInit {
     constructor(
         @Inject(DATABASE_POOL) private readonly _conn: Pool,
         private readonly _httpService: HttpService,
-    ) {}
+    ) { }
 
     async onModuleInit(): Promise<void> {
         const { rows } = await this._conn.query<User>('SELECT * FROM users')

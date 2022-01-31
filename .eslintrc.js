@@ -101,6 +101,7 @@ module.exports = {
   },
   "ignorePatterns": [
     ".eslintrc.js",
+    "*.js",
     '[0-9]*.ts' // not to lint migrations files, example: 152325322-create-db.ts
   ],
 };
